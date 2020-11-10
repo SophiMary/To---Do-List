@@ -1,53 +1,68 @@
 import React, { useState } from 'react';
-import List from '../List/List';
 import './Login.css';
+import { auth } from '../firebase'
+import Home from '../Home/Home';
 
-export default function Login() {
+
+export default function Signup() {
     const [ isLoggedIn, setLogIn ] = useState(false);
+    const [ nameValue, setNameValue ] = useState('');
     const [ emailValue, setEmailValue ] = useState('');
     const [ passwordValue, setPasswordValue ] = useState('')
+
 
     const submitValues = (e) => {
         e.preventDefault();
 
-        const payload = {
-            email: emailValue,
-            password: passwordValue
-        }
-
-        fetch(('https://reqres.in/api/login'), {
-            method: 'POST',
-            body: JSON.stringify(payload)
+        auth.signInWithEmailAndPassword(emailValue, passwordValue)
+        .then(()=>{
+            setLogIn(true);
         })
-        .then(data => {
-            console.log(data);
-            setLogIn(true)
-        })
-        setEmailValue('');
-        setPasswordValue('');
+        .catch((error) => {
+            alert("Signing up the new user");
+            auth.createUserWithEmailAndPassword(emailValue, passwordValue)
+            .then(()=>{
+                setLogIn(true);
+            })
+            .catch((error) =>{
+                alert(error.message)
+            })
+        })    
     }
 
     return(
-        <div className='login-page'>
-            <h1 className='loginHeading'> To - Do App </h1>
-            <form className='loginForm'>
-                <input className='emailField' type='email' 
-                    placeholder="Email ID"
-                    value={emailValue} 
-                    onChange={event => { 
-                        setEmailValue(event.target.value)
-                    }}
-                />
-                <input className='passwordField' type='password' 
-                    placeholder="Password"
-                    value={passwordValue} 
-                    onChange={event => { 
-                        setPasswordValue(event.target.value)
-                    }}
-                />
-                <button className='logInButton' type='submit' onClick={submitValues}>Login</button>
-            </form>
-            {isLoggedIn && <List />}
+        <div>
+            {isLoggedIn ? <Home email={emailValue} name={nameValue}/> :
+                (<div className='login-page'>
+                    <h1 className='loginHeading'> To - Do App </h1>
+                    <form className='loginForm' onSubmit={submitValues}>
+                    <input className='nameField' type='text' 
+                            placeholder = "Name"
+                            value={nameValue} 
+                            onChange={event => { 
+                                setNameValue(event.target.value)
+                            }}
+                            required
+                        />
+                        <input className='emailField' type='email' 
+                            placeholder = "✉️ &nbsp; &nbsp; Email"
+                            value={emailValue} 
+                            onChange={event => { 
+                                setEmailValue(event.target.value)
+                            }}
+                            required
+                        />
+                        <input className='passwordField' type='password' 
+                            placeholder="🔒 &nbsp; &nbsp; Password"
+                            value={passwordValue} 
+                            onChange={event => { 
+                                setPasswordValue(event.target.value)
+                            }}
+                            required
+                        />
+                        <button className='logInButton' type='submit'>Login</button>
+                    </form>
+                </div>)}
         </div>
     )
 }

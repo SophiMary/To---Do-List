@@ -10,7 +10,7 @@
     flex-direction: column;
 }
 
-.emailField, .passwordField, .logInButton {
+.nameField, .emailField, .passwordField, .logInButton {
     display: block;
     margin: auto;
     padding: 15px;
@@ -19,7 +19,7 @@
     font-size: 20px;
 }
 
-.emailField, .passwordField {
+.nameField, .emailField, .passwordField {
     width: 500px;
     margin-top: 20px;
     background-color: rgba(243, 239, 239, 0.781);
@@ -30,4 +30,5 @@
     width: 525px;
     margin-top: 50px;
     color: #fff;
+    cursor: pointer;
 }
