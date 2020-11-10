@@ -1,14 +1,15 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import { API_KEY, AUTH_DOMAIN, DATABASE_URL, PROJECT_ID, STORAGE_BUCKET, MESSAGE_SENDER_ID, APP_ID } from './API'
 
 const app = firebase.initializeApp({
-    apiKey: "AIzaSyDBbzgQJeULefbSZDFCahiVw3jnKLesvzs",
-    authDomain: "to---do.firebaseapp.com",
-    databaseURL: "https://to---do.firebaseio.com",
-    projectId: "to---do",
-    storageBucket: "to---do.appspot.com",
-    messagingSenderId: "406046278974",
-    appId: "1:406046278974:web:15f9cb1acc1a74276ed86f"
+    apiKey: API_KEY,
+    authDomain: AUTH_DOMAIN,
+    databaseURL: DATABASE_URL,
+    projectId: PROJECT_ID,
+    storageBucket: STORAGE_BUCKET,
+    messagingSenderId: MESSAGE_SENDER_ID,
+    appId: APP_ID
 });
 
 export const auth = app.auth();
