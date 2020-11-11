@@ -22,7 +22,6 @@ export default function List() {
         event.preventDefault();
         console.log(input);
         db.collection('todo').add({
-            id: input,
             todo: input
         })
         setInput('') // clears the input after clicking on 'Add task' 
