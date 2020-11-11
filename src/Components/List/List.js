@@ -1,25 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { db } from '.././firebase';
+import ToDoList from '../ToDoList';
 
 export default function List() {
 
     const [todos, setTodos] = useState([]);
     const [input, setInput] = useState('');
 
+    useEffect(() => {
+        db.collection('todo').onSnapshot(snapshot => {
+            setTodos(snapshot.docs.map(doc => ({
+                    id: doc.id,
+                    todo: doc.data().task
+                })
+            ))
+        })
+    }, [])
+
+
     const addTodo = (event) => {
         event.preventDefault();
-        setTodos([...todos, input]); //appends the submitted input to the todos array
+        console.log(input);
+        db.collection('todo').add({
+            id: input,
+            todo: input
+        })
         setInput('') // clears the input after clicking on 'Add task' 
     }
 
     return(
         <div className="List">
             <form>
-                <input value={input} onChange={event => { setInput(event.target.value)}}/>
+                <input value={input} onChange={event => { setInput(event.target.value) }}/>
                 <button type='submit' onClick={addTodo}>Add task</button>
             </form>
             <ul>
-                {todos.map(todo => {
-                    return(<li>{todo}</li>)
+                {todos.map(({id, todo}) => {
+                    return(<ToDoList 
+                            key={id}
+                            todo={todo}
+                        />
+                    )
                 })}
             </ul>
         </div>
