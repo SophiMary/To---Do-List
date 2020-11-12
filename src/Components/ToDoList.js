@@ -1,6 +1,8 @@
-import React from 'react'
+import React from "react"
 
 function ToDoList(props) {
+    console.log("3 : " +props.todo)
+
     return (
         <div>
             <ul>

@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import './Login.css';
-import { auth } from '../firebase'
-import Home from '../Home/Home';
+import React, { useState } from "react";
+import "./Login.css";
+import { auth } from "../firebase"
+import Home from "../Home/Home";
 
 
 export default function Signup() {
     const [ isLoggedIn, setLogIn ] = useState(false);
-    const [ nameValue, setNameValue ] = useState('');
-    const [ emailValue, setEmailValue ] = useState('');
-    const [ passwordValue, setPasswordValue ] = useState('')
+    const [ nameValue, setNameValue ] = useState("");
+    const [ emailValue, setEmailValue ] = useState("");
+    const [ passwordValue, setPasswordValue ] = useState("")
 
 
     const submitValues = (e) => {
@@ -33,10 +33,10 @@ export default function Signup() {
     return(
         <div>
             {isLoggedIn ? <Home email={emailValue} name={nameValue}/> :
-                (<div className='login-page'>
-                    <h1 className='loginHeading'> To - Do App </h1>
-                    <form className='loginForm' onSubmit={submitValues}>
-                    <input className='nameField' type='text' 
+                (<div className="login-page">
+                    <h1 className="loginHeading"> To - Do App </h1>
+                    <form className="loginForm" onSubmit={submitValues}>
+                    <input className="nameField" type="text" 
                             placeholder = "Name"
                             value={nameValue} 
                             onChange={event => { 
@@ -44,7 +44,7 @@ export default function Signup() {
                             }}
                             required
                         />
-                        <input className='emailField' type='email' 
+                        <input className="emailField" type="email" 
                             placeholder = "✉️ &nbsp; &nbsp; Email"
                             value={emailValue} 
                             onChange={event => { 
@@ -52,7 +52,7 @@ export default function Signup() {
                             }}
                             required
                         />
-                        <input className='passwordField' type='password' 
+                        <input className="passwordField" type="password" 
                             placeholder="🔒 &nbsp; &nbsp; Password"
                             value={passwordValue} 
                             onChange={event => { 
@@ -60,7 +60,7 @@ export default function Signup() {
                             }}
                             required
                         />
-                        <button className='logInButton' type='submit'>Login</button>
+                        <button className="logInButton" type="submit">Login</button>
                     </form>
                 </div>)}
         </div>

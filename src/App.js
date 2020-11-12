@@ -1,6 +1,6 @@
-import React from 'react';
-import './App.css';
-import Login from './Components/Login/Login';
+import React from "react";
+import "./App.css";
+import Login from "./Components/Login/Login";
 
 export default function App() {
   return (
