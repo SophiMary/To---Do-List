@@ -1,29 +1,72 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { db } from "../firebase";
 import "./CreateTask.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function CreateTask() {
+    const tagNames = [];
 
-    const [ input, setInput ] = useState("");
+
+    const [ task, setTask ] = useState("");
     const [ description, addDescription ] = useState("");
-    const [ taskDate, setTaskDate ] = useState(new Date());
+    let [ taskDate, setTaskDate ] = useState(new Date());
+    // let [ state, setState ] = useState({
+    //     isChecked: false
+    // })
 
     const addTodo = (event) => {
         event.preventDefault();
-        console.log(input);
+        // taskDate = taskDate.toDateString();
+        // console.log(taskDate);
         db.collection("todo").add({
-            task: input
+            task,
+            description,
+            taskDate,
+            tagNames
         })
-        setInput(""); // clears the input after clicking on "Add task" 
+        setTask(""); // clears the input after clicking on "Add task" 
         addDescription("");
     }
+
+    const navigateBack = () => {
+
+    }
+
+    const handleCheckbox = (e) => {
+        const target = e.target;
+
+        if(target.checked) {
+            tagNames.push(target.name)
+        }else{
+            if(tagNames.includes(target.name)){
+                tagNames.pop(target.name)
+            }  
+        }
+         console.log(tagNames);   
+    }
+
+        // if(target.checked) {
+        //     if()
+        //     setState({
+        //         isChecked: true
+        //     })
+        // }
+        // const value = target.type === 'checkbox' ? target.checked : target.value;
+        // const name = target.name;
+
+        // console.log("value" + value);
+        // console.log("name" + e)
+
+        // setState( {
+        //     [name]: value
+        // })
+        // console.log("setState" + state);
 
     return(
         <div>
             <div className="listHeader">
-                <p> ← </p>
+                <button type="button" className="backButton" onClick={navigateBack}> ← </button>
                 <p>Create Task</p>
             </div>
 
@@ -34,14 +77,14 @@ export default function CreateTask() {
                         <div className="taskAndDescription">
 
                             <div className="taskLabelSection">
-                                <label for="task" className="taskLabel">Enter Task Name</label>
+                                <label htmlFor="task" className="taskLabel">Enter Task Name</label>
                             </div>
                             <div className="taskFiled">
-                                <input value={input} className="task" onChange={event => { setInput(event.target.value) }} placeholder="Task Name" required/>
+                                <input value={task} className="task" onChange={event => { setTask(event.target.value) }} placeholder="Task Name" required/>
                             </div>
                     
                             <div className="decriptionLabelSection">
-                                <label for="description" className="descriptionLabel">Enter Description</label>
+                                <label htmlFor="description" className="descriptionLabel">Enter Description</label>
                             </div>
 
                             <div className="decriptionField">
@@ -56,21 +99,27 @@ export default function CreateTask() {
                             </div>
                             
                             <div className="tagsOption">
-                                <input type="checkbox" className="personal"/>
-                                <label className="personalLabel" for="Personal">Personal</label>    
-                        
-                                <input type="checkbox" className="official"/>
-                                <label className="officialLabel" for="Official">Official</label>    
+                                <label className="personalLabel" htmlFor="personal">
+                                    <input type="checkbox" name="Personal" className="personal"  onChange={handleCheckbox}/>
+                                    Personal
+                                </label>
 
-                                <input type="checkbox" className="miscellaneous"/>
-                                <label className="miscellaneousLabel" for="Miscellaneous">Miscellaneous</label>
+                                <label className="officialLabel" htmlFor="official">
+                                    <input type="checkbox" name="Official" className="official" onChange={handleCheckbox}/>
+                                    Official
+                                </label>
+
+                                <label className="miscellaneousLabel" htmlFor="miscellaneous">
+                                    <input type="checkbox" name="Miscellaneous" className="miscellaneous"  onChange={handleCheckbox}/>
+                                    Miscellaneous
+                                </label>
                             </div>
                         </div>
                         
 
                         <div className="dateField">
                             <div className="dateLabelSection">
-                                <label for="date" className="dateLabel">Select Date</label>
+                                <label htmlFor="date" className="dateLabel">Select Date</label>
                             </div>
                             <div className="datePickerField">
                                 <DatePicker className="date datePicker" selected={taskDate} onChange={date => setTaskDate(date)} />
@@ -78,8 +127,8 @@ export default function CreateTask() {
                         </div>
 
                         <div className="buttons">
-                            <button className="cancelButton" type="button">Cancel</button> 
-                            <button className="createButton" type="submit">Create</button>
+                            <button className="cancelButton" type="button" onClick={navigateBack}>Cancel</button> 
+                            <button className="createButton" type="submit" onClick={addTodo}>Create</button>
                         </div>
 
                     </div>

@@ -39,11 +39,11 @@ export default function Login() {
 
     return(
         <div>        
-            {isLoggedIn ? 
-            ( <>
+            {/* {isLoggedIn ? 
+            ( <> */}
                 <Home email={emailValue} name={nameValue}/> 
                 <div className="logOutButton"><button type="button" onClick={logOutUser} className="logOut">Log Out</button></div>
-            </>) :
+            {/* </>) :
                 (<div className="login-page">
                     <h1 className="loginHeading"> To - Do App </h1>
                     <form className="loginForm" onSubmit={submitValues}>
@@ -73,7 +73,7 @@ export default function Login() {
                         />
                         <button className="logInButton" type="submit">Login</button>
                     </form>
-                </div>)}
+                </div>)} */}
         </div>
     )
 }

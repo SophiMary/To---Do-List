@@ -17,9 +17,10 @@ export default function TaskPage() {
                     id: doc.id,
                     todo: doc.data()
                 })
-            ))
+                ))
         })
     }, [])
+
 
     const taskButton = () => {
         getToNewTaskPage(true);
@@ -40,7 +41,7 @@ export default function TaskPage() {
                     {todos.map(({id, todo}) => {
                     return(<ToDoList 
                                 key={id}
-                                todo={todo.task}
+                                todo={todo}
                             />
                         )
                     })}
