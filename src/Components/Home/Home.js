@@ -1,16 +1,14 @@
 import React from "react"
 import Profile from "../Profile/Profile"
-import List from "../List/List"
 import "./Home.css"
-import Task from "../Task/Task";
+import TaskPage from "../TaskPage/TaskPage";
 
-function Home(props) {
+export default function Home(props) {
     return (
         <div className="dashboard">
-            <Profile name={props.name} email={props.email}/>
-            <Task />
+            {/* <Profile name={props.name} email={props.email}/> */}
+            <Profile />
+            <TaskPage />
         </div>
     )
 }
-
-export default Home

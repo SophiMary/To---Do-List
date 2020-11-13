@@ -4,7 +4,7 @@ import { auth } from "../firebase"
 import Home from "../Home/Home";
 
 
-export default function Signup() {
+export default function Login() {
     const [ isLoggedIn, setLogIn ] = useState(false);
     const [ nameValue, setNameValue ] = useState("");
     const [ emailValue, setEmailValue ] = useState("");
@@ -31,8 +31,9 @@ export default function Signup() {
     }
 
     return(
-        <div>
-            {isLoggedIn ? <Home email={emailValue} name={nameValue}/> :
+        <div><Home />
+        <div className="logOutButton"><button className="logOut">Log Out</button></div>
+            {/* {isLoggedIn ? <Home email={emailValue} name={nameValue}/> :
                 (<div className="login-page">
                     <h1 className="loginHeading"> To - Do App </h1>
                     <form className="loginForm" onSubmit={submitValues}>
@@ -62,7 +63,7 @@ export default function Signup() {
                         />
                         <button className="logInButton" type="submit">Login</button>
                     </form>
-                </div>)}
+                </div>)} */}
         </div>
     )
 }

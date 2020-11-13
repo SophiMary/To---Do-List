@@ -1,7 +1,7 @@
 import React from "react"
 import "./Profile.css"
 
-function Profile(props) {
+export default function Profile(props) {
     return (
         <div className="profileSection">
             <div className="userInfo">
@@ -18,8 +18,8 @@ function Profile(props) {
                     <p className="secondRowItem">shdcg</p>
                 </div>
             </div>
+
+            <div> Graph</div>
         </div>
     )
 }
-
-export default Profile

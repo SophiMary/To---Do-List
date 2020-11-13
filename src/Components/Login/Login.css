@@ -32,3 +32,17 @@
     color: #fff;
     cursor: pointer;
 }
+
+.logOutButton {
+    position: relative;
+}
+
+.logOut {
+    position: absolute;
+    left: 110px;
+    border-radius: 15px;
+    border: none;
+    color: #fff;
+    background-color: #28AE60;
+    padding: 10px;
+}
