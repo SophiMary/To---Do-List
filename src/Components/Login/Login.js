@@ -30,10 +30,20 @@ export default function Login() {
         })    
     }
 
+    const logOutUser = () => {
+        auth.signOut()
+            .then(() => {
+            setLogIn(false);
+        })
+    }
+
     return(
-        <div><Home />
-        <div className="logOutButton"><button className="logOut">Log Out</button></div>
-            {/* {isLoggedIn ? <Home email={emailValue} name={nameValue}/> :
+        <div>        
+            {isLoggedIn ? 
+            ( <>
+                <Home email={emailValue} name={nameValue}/> 
+                <div className="logOutButton"><button type="button" onClick={logOutUser} className="logOut">Log Out</button></div>
+            </>) :
                 (<div className="login-page">
                     <h1 className="loginHeading"> To - Do App </h1>
                     <form className="loginForm" onSubmit={submitValues}>
@@ -63,7 +73,7 @@ export default function Login() {
                         />
                         <button className="logInButton" type="submit">Login</button>
                     </form>
-                </div>)} */}
+                </div>)}
         </div>
     )
 }

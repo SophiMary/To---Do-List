@@ -6,8 +6,7 @@ import TaskPage from "../TaskPage/TaskPage";
 export default function Home(props) {
     return (
         <div className="dashboard">
-            {/* <Profile name={props.name} email={props.email}/> */}
-            <Profile />
+            <Profile name={props.name} email={props.email}/>
             <TaskPage />
         </div>
     )
